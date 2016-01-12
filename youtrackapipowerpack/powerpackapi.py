@@ -151,6 +151,7 @@ class PowerPackApi(object):
         to_email = []
 
         release_notes = []
+        bggray = 'class="bg-gray"'
 
         # cc e-mails
         for email in emails_cc:
@@ -189,9 +190,16 @@ class PowerPackApi(object):
 
                 # add issue to release notes
                 notes = [
+                    '<li %s>' % bggray,
                     '<h3><a href="%s"><b># %s - %s</b></a></h3>' % (url, issue.id, issue.summary),
-                    '<div>%s <br /> %s</div>' % (issue_description, asana_data)
+                    '<div>%s <br /> %s</div>' % (issue_description, asana_data),
+                    '</li>'
                 ]
+
+                if bggray == '':
+                    bggray = 'class="bg-gray"'
+                else:
+                    bggray = ''
 
                 # adiciona ao release notes os dados da task
                 release_notes.append(''.join(i for i in notes))
